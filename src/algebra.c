@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-11 23:08:21
+ * @LastEditTime: 2024-04-11 23:24:01
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -36,7 +36,7 @@ Matrix add_matrix(Matrix a, Matrix b)
         }
         else
         {
-            printf("Error: Matrix a and b must have the same rows and cols\n");
+            printf("Error: Matrix a and b must have the same rows and cols.\n");
             
         }
         return c;
@@ -60,7 +60,7 @@ Matrix add_matrix(Matrix a, Matrix b)
         }
         else
         {
-            printf("Error: Matrix a and b must have the same rows and cols\n");
+            printf("Error: Matrix a and b must have the same rows and cols.\n");
         }
         return c;
     }
@@ -69,7 +69,7 @@ Matrix add_matrix(Matrix a, Matrix b)
     {   Matrix c=create_matrix(a.rows,a.cols);
         if (a.cols != b.rows)
         {
-            printf("Error:Matrix a's cols must be the same with b's rows\n");
+            printf("Error:Matrix a's cols must be the same with b's rows.\n");
         }
         else
         {
@@ -132,9 +132,13 @@ Matrix add_matrix(Matrix a, Matrix b)
     }
 
     double trace_matrix(Matrix a)
-    {
-        // ToDo
-        return 0;
+    {   int k;
+        int i,j=0;
+        for(i=0;i<a.rows;i++){
+            k+=a.data[i][i];
+        }
+        // ToDo finished
+        return k;
     }
 
     void print_matrix(Matrix a)
