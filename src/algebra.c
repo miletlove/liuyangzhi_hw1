@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-11 23:24:01
+ * @LastEditTime: 2024-04-12 20:06:26
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -32,14 +32,14 @@ Matrix add_matrix(Matrix a, Matrix b)
                     c.data[i][j] = a.data[i][j] + b.data[i][j];
                 }
             } // ToDo finished
-            
+            return c;
         }
         else
         {
             printf("Error: Matrix a and b must have the same rows and cols.\n");
-            
+            return create_matrix(0,0);
         }
-        return c;
+        
     }
 
     Matrix sub_matrix(Matrix a, Matrix b)
@@ -56,13 +56,14 @@ Matrix add_matrix(Matrix a, Matrix b)
                 }
             }
             // ToDo finished
-            
+            return c;
         }
         else
         {
             printf("Error: Matrix a and b must have the same rows and cols.\n");
+            return create_matrix(0,0);
         }
-        return c;
+        
     }
 
     Matrix mul_matrix(Matrix a, Matrix b)
@@ -70,6 +71,7 @@ Matrix add_matrix(Matrix a, Matrix b)
         if (a.cols != b.rows)
         {
             printf("Error:Matrix a's cols must be the same with b's rows.\n");
+            return create_matrix(0,0);
         }
         else
         {
@@ -87,8 +89,8 @@ Matrix add_matrix(Matrix a, Matrix b)
                     }
                 }
             }
-            
-        }return c;
+            return create_matrix(0,0);
+        }
         // ToDo finished
     }
 
@@ -108,7 +110,7 @@ Matrix add_matrix(Matrix a, Matrix b)
     }
 
     Matrix transpose_matrix(Matrix a)
-    {
+    {    Matrix c=create_matrix(a.cols,a.rows);
         // ToDo
         return create_matrix(0, 0);
     }
