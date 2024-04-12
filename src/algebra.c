@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-12 22:50:30
+ * @LastEditTime: 2024-04-12 23:10:48
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -139,12 +139,11 @@ double det_matrix(Matrix a)
                     {
                         c.data[i][j] = a.data[i + 1][j];
                     }for(int j=l+1;j<a.cols;j++){
-                        c.data[i][j-1]=a.data[i+1][j];
+                        c.data[i][j-1]=a.data[i+1][j];  //创建对应元素的余子式
                     }
                 }
                 if(l%2==0)k=1;
-                else k=-1;
-                1;
+                else k=-1; 
                 m=m+k*a.data[0][l]*det_matrix(c);
             }
             return m;
@@ -157,7 +156,7 @@ double det_matrix(Matrix a)
         {
             return a.data[0][0];
         }
-        // ToDo
+        // ToDo finished
     }
     else
     {
