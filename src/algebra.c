@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-12 23:10:48
+ * @LastEditTime: 2024-04-15 16:22:29
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -131,20 +131,24 @@ double det_matrix(Matrix a)
         {
 
             Matrix c = create_matrix(a.rows - 1, a.cols - 1);
-            for (int l =0 ; l < a.cols; l++)
+            for (int l = 0; l < a.cols; l++)
             {
                 for (int i = 0; i < c.rows; i++)
                 {
                     for (int j = 0; j < l; j++)
                     {
                         c.data[i][j] = a.data[i + 1][j];
-                    }for(int j=l+1;j<a.cols;j++){
-                        c.data[i][j-1]=a.data[i+1][j];  //创建对应元素的余子式
+                    }
+                    for (int j = l + 1; j < a.cols; j++)
+                    {
+                        c.data[i][j - 1] = a.data[i + 1][j]; // 创建对应元素的余子式
                     }
                 }
-                if(l%2==0)k=1;
-                else k=-1; 
-                m=m+k*a.data[0][l]*det_matrix(c);
+                if (l % 2 == 0)
+                    k = 1;
+                else
+                    k = -1;
+                m = m + k * a.data[0][l] * det_matrix(c);
             }
             return m;
         }
@@ -166,9 +170,59 @@ double det_matrix(Matrix a)
 }
 
 Matrix inv_matrix(Matrix a)
-{
+{   if (1){
+    Matrix c = create_matrix(a.rows - 1, a.cols - 1);
+    Matrix d = create_matrix(a.rows, a.cols);
+    Matrix e = create_matrix(a.rows,a.cols);
+    int k = 1;
+    int m, n = 0;
+    for (m = 0; m < a.rows; m++)
+    {
+        for (n = 0; n < a.cols; n++)
+        {
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    c.data[i][j] = a.data[i][j];
+                }
+            }
+            for (int i = m + 1; i < a.rows; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    c.data[i-1][j] = a.data[i][j];
+                }
+            }
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = n + 1; j < a.cols; j++)
+                {
+                    c.data[i][j-1] = a.data[i][j];
+                }
+            }
+            for (int i = m + 1; i < a.rows; i++)
+            {
+                for (int j = n + 1; j < a.cols; j++)
+                {
+                    c.data[i-1][j-1] = a.data[i][j];
+                }
+            }
+         int k=0;k=m+n;
+         if(k%2==0) {k=1;d.data[m][n]=det_matrix(c);}
+         else {k=-1;d.data[m][n]=k*det_matrix(c);}
+
+        }
+    } 
+    double det=0;det=det_matrix(a);
+    e = scale_matrix(d,1/det);
+    return d;}
+    else{
+         printf("Matrix a must have a full rank!\n");
+         return create_matrix(0,0);
+    }
     // ToDo
-    return create_matrix(0, 0);
+    
 }
 
 int rank_matrix(Matrix a)
@@ -181,9 +235,8 @@ double trace_matrix(Matrix a)
 {
     if (a.rows != a.cols)
     {
-        double k = 0.0;
         printf("Matrix a's rows must be the same as its cols.\n");
-        return k;
+        return 0;
     }
     else
     {
