@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-15 16:22:29
+ * @LastEditTime: 2024-04-22 15:39:09
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -170,65 +170,148 @@ double det_matrix(Matrix a)
 }
 
 Matrix inv_matrix(Matrix a)
-{   if (1){
-    Matrix c = create_matrix(a.rows - 1, a.cols - 1);
-    Matrix d = create_matrix(a.rows, a.cols);
-    Matrix e = create_matrix(a.rows,a.cols);
-    int k = 1;
-    int m, n = 0;
-    for (m = 0; m < a.rows; m++)
+{
+    if (a.rows == a.cols && rank_matrix(a)==a.rows)
     {
-        for (n = 0; n < a.cols; n++)
+        Matrix c = create_matrix(a.rows - 1, a.cols - 1);
+        Matrix d = create_matrix(a.rows, a.cols);
+        Matrix e = create_matrix(a.rows, a.cols);
+        int k = 1;
+        int m, n = 0;
+        for (m = 0; m < a.rows; m++)
         {
-            for (int i = 0; i < m; i++)
+            for (n = 0; n < a.cols; n++)
             {
-                for (int j = 0; j < n; j++)
+                for (int i = 0; i < m; i++)
                 {
-                    c.data[i][j] = a.data[i][j];
+                    for (int j = 0; j < n; j++)
+                    {
+                        c.data[i][j] = a.data[i][j];
+                    }
+                }
+                for (int i = m + 1; i < a.rows; i++)
+                {
+                    for (int j = 0; j < n; j++)
+                    {
+                        c.data[i - 1][j] = a.data[i][j];
+                    }
+                }
+                for (int i = 0; i < m; i++)
+                {
+                    for (int j = n + 1; j < a.cols; j++)
+                    {
+                        c.data[i][j - 1] = a.data[i][j];
+                    }
+                }
+                for (int i = m + 1; i < a.rows; i++)
+                {
+                    for (int j = n + 1; j < a.cols; j++)
+                    {
+                        c.data[i - 1][j - 1] = a.data[i][j];
+                    }
+                }
+                int k = 0;
+                k = m + n;
+                if (k % 2 == 0)
+                {
+                    k = 1;
+                    d.data[m][n] = det_matrix(c);
+                }
+                else
+                {
+                    k = -1;
+                    d.data[m][n] = k * det_matrix(c);
                 }
             }
-            for (int i = m + 1; i < a.rows; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    c.data[i-1][j] = a.data[i][j];
-                }
-            }
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = n + 1; j < a.cols; j++)
-                {
-                    c.data[i][j-1] = a.data[i][j];
-                }
-            }
-            for (int i = m + 1; i < a.rows; i++)
-            {
-                for (int j = n + 1; j < a.cols; j++)
-                {
-                    c.data[i-1][j-1] = a.data[i][j];
-                }
-            }
-         int k=0;k=m+n;
-         if(k%2==0) {k=1;d.data[m][n]=det_matrix(c);}
-         else {k=-1;d.data[m][n]=k*det_matrix(c);}
-
         }
-    } 
-    double det=0;det=det_matrix(a);
-    e = scale_matrix(d,1/det);
-    return d;}
-    else{
-         printf("Matrix a must have a full rank!\n");
-         return create_matrix(0,0);
+        double det = 0;
+        det = det_matrix(a);
+        e = scale_matrix(d, 1 / det);
+        return d;
     }
-    // ToDo
-    
+    else if(a.rows == a.cols && rank_matrix(a)!= a.rows)
+    {
+        printf("Matrix a must have a full rank!\n");
+        return create_matrix(0, 0);
+    }else{
+        printf("Matrix a's rows must be the same as its cols!\n");
+        return create_matrix(0,0);
+    }
+    // ToDo finished
 }
 
 int rank_matrix(Matrix a)
 {
-    // ToDo
-    return 0;
+    int rank,colsn=0,rowsn=0;
+    if (a.rows <= a.cols)
+        rank = a.rows;
+    else
+        rank = a.cols;
+    for (int i = 0; i < a.cols; i++)
+    {
+        if (a.data[i][i] == 0)
+        {
+            int j = i + 1;
+            while (a.data[j][i] == 0)
+            {
+                j = j + 1;
+            } // 找非零
+            if (j < a.rows){
+            
+                for (int k = 0; k < a.cols; k++)
+                {
+                    double m;
+                    m = a.data[j][i];
+                    a.data[j][k] = a.data[i][k];
+                    a.data[i][k] = m;
+                }  //在下面找到非零元素后，交换行
+            for (int j = i + 1; j < a.rows; j++)
+            {
+                if (a.data[j][i] != 0)
+                {   double solid=a.data[j][i];
+                    for (int k = 0; k < a.cols; k++){
+                        double result=solid*a.data[j][k]/a.data[i][i];
+                        a.data[j][k] = a.data[j][k]-result;
+                    }
+                }
+                else;//化成上三角形
+            }
+            }else;
+        }
+        else
+        {
+            for (int j = i+1; j < a.rows; j++)
+            {
+                if (a.data[j][i] != 0)
+                {   double solid=a.data[j][i];
+                    for (int k = 0; k < a.cols; k++){
+                        double result=solid*a.data[j][k]/a.data[i][i];
+                        a.data[j][k] = a.data[j][k]-result;
+                    }
+                }
+                else;
+            }
+        }
+
+    }for(int i=0;i<a.cols;i++){
+       for(int j=0;j<a.rows;j++){
+        if(a.data[j][i]!=0){
+            colsn=colsn+1;
+            break;
+        }
+       }
+    }for(int i=0;i<a.rows;i++){
+       for(int j=0;j<a.cols;j++){
+        if(a.data[i][j]!=0){
+            rowsn=rowsn+1;
+            break;
+        }
+       }
+    }
+    int l=0;
+    if(colsn>=rowsn)l=rowsn;
+    else l=colsn;
+    return l;  //ToDo finished
 }
 
 double trace_matrix(Matrix a)

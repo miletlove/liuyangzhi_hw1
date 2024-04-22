@@ -1,3 +1,11 @@
+<!--
+ * @Author: lyz 3068126392@qq.com
+ * @Date: 2024-04-09 20:41:44
+ * @LastEditors: lyz 3068126392@qq.com
+ * @LastEditTime: 2024-04-22 14:20:41
+ * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\doc\thinking.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 # 思路参考
 几个简单的就不给参考了，这里只提供行列式、求逆和秩的实现思路
 ## 行列式求解
