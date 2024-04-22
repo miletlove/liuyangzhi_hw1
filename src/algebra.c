@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-22 16:19:58
+ * @LastEditTime: 2024-04-22 20:25:15
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -247,7 +247,7 @@ int rank_matrix(Matrix a)
         rank = a.rows;
     else
         rank = a.cols;
-    for (int i = 0; i < a.cols; i++)
+    for (int i = 0; i < a.cols-1; i++)
     {
         if (a.data[i][i] == 0)
         {
@@ -285,7 +285,7 @@ int rank_matrix(Matrix a)
                 if (a.data[j][i] != 0)
                 {   double solid=a.data[j][i];
                     for (int k = 0; k < a.cols; k++){
-                        double result=solid*a.data[j][k]/a.data[i][i];
+                        double result=solid*a.data[i][k]/a.data[i][i];
                         a.data[j][k] = a.data[j][k]-result;
                     }
                 }
