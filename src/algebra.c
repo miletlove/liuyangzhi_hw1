@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-23 23:21:17
+ * @LastEditTime: 2024-04-24 12:58:36
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -165,7 +165,7 @@ double det_matrix(Matrix a)
     else
     {
         printf("Eorror: Matrix a's rows must be the same as its cols.\n");
-        return 0;
+        return 0.0;
     }
 }
 
@@ -178,9 +178,9 @@ Matrix inv_matrix(Matrix a)
         Matrix e = create_matrix(a.rows, a.cols);
         int k = 1;
         int m, n = 0;
-        for (m = 0; m < a.rows; m++)
+        for (n = 0; n < a.cols; n++)
         {
-            for (n = 0; n < a.cols; n++)
+            for (m = 0; m < a.rows; m++)
             {
                 for (int i = 0; i < m; i++)
                 {
@@ -210,20 +210,22 @@ Matrix inv_matrix(Matrix a)
                         c.data[i - 1][j - 1] = a.data[i][j];
                     }
                 }
+                
                 int k = 0;
                 k = m + n;
                 if (k % 2 == 0)
                 {
                     k = 1;
-                    d.data[n][m] = det_matrix(c);
+                    d.data[m][n] = det_matrix(c);
                 }
                 else
                 {
                     k = -1;
-                    d.data[n][m] = k * det_matrix(c);
+                    d.data[m][n] = k * det_matrix(c);
                 }
             }
         }
+        d=transpose_matrix(d);
         double det = 0;
         det = det_matrix(a);
         e = scale_matrix(d, 1 / det);
