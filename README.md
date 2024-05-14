@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-10 17:02:18
+ * @LastEditTime: 2024-05-14 14:24:12
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -70,5 +70,9 @@ Error: Matrix a and b must have the same rows and cols.
 
 [https://tannin-1316822731.cos.ap-nanjing.myqcloud.com/2024-03-29-827_1711724348.mp4](https://tannin-1316822731.cos.ap-nanjing.myqcloud.com/2024-03-29-827_1711724348.mp4)
 
-## 截止日期｜Deadline
-待定
+## Mythinking
+### det：选择按照第一行展开递归
+### inv_matrix: 选择分左上、左下、右上、右下四个区域按次序计入新建矩阵作为余子式，再引用函数det_matrix计算原矩阵的值。
+## rank_matrix:按照高斯消元法逐步实现
+## 本地运行记录
+![add_matrix](https://miletlove-1325518904.cos.ap-shanghai.myqcloud.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-05-14%20142548.png)
