@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-05-17 16:28:20
+ * @LastEditTime: 2024-05-17 16:32:48
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -171,7 +171,7 @@ double det_matrix(Matrix a)
 
 Matrix inv_matrix(Matrix a)
 {
-    if (a.rows == a.cols && det_matrix(a)!= 0)
+    if (a.rows == a.cols && rank_matrix(a)==a.rows)
     {
         Matrix c = create_matrix(a.rows - 1, a.cols - 1);
         Matrix d = create_matrix(a.rows, a.cols);
