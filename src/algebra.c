@@ -2,7 +2,7 @@
  * @Author: lyz 3068126392@qq.com
  * @Date: 2024-04-09 20:41:44
  * @LastEditors: lyz 3068126392@qq.com
- * @LastEditTime: 2024-04-26 09:24:50
+ * @LastEditTime: 2024-05-17 16:28:20
  * @FilePath: \c++e:\Workspace\liuyangzhi_hw1\src\algebra.c
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -67,7 +67,7 @@ Matrix mul_matrix(Matrix a, Matrix b)
     Matrix c = create_matrix(a.rows, b.cols);
     if (a.cols != b.rows)
     {
-        printf("Error: Matrix a's cols must be the same with b's rows.\n");
+        printf("Error: The number of cols of matrix a must be equal to the number of rows of matrix b.\n");
         return create_matrix(0, 0);
     }
     else
@@ -164,7 +164,7 @@ double det_matrix(Matrix a)
     }
     else
     {
-        printf("Eorror: Matrix a's rows must be the same as its cols.\n");
+        printf("Error: The matrix must be a square matrix.\n");
         return 0.0;
     }
 }
@@ -230,7 +230,7 @@ Matrix inv_matrix(Matrix a)
         e = scale_matrix(d, 1 / det);
         return e;
     }else{
-        printf("Eorror: Matrix a's rows must be the same as its cols!\n");
+        printf("Error: The matrix must be a square matrix.\n");
         return create_matrix(0,0);
     }
     // ToDo finished
@@ -315,7 +315,7 @@ double trace_matrix(Matrix a)
 {
     if (a.rows != a.cols)
     {
-        printf("Eorror: Matrix a's rows must be the same as its cols.\n");
+        printf("Error: The matrix must be a square matrix.\n");
         return 0.0;
     }
     else
